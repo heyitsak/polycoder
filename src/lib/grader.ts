@@ -50,7 +50,7 @@ export async function gradeTests(
         results.push({ label, expected: '', actual: 'no reference query', pass: false, timedOut: false, timeMs: user.timeMs })
         continue
       }
-      const ref = await runSql(setup, tc.query)
+      const ref = await runSql(setup, level.modelSolution || tc.query)
       const pass = sqlEqual(user, ref)
       results.push({
         label,

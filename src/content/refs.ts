@@ -109,7 +109,7 @@ export const refs: Record<string, (raw: string) => string> = {
     const amount = +t[0], k = +t[1]
     return J(minCoins(amount, t.slice(2, 2 + k).map(Number)))
   },
-  longest: raw => J(longest(T(raw)[0])),
+  longest: raw => J(longest(T(raw)[0] ?? '')),
   components: raw => J(components(T(raw))),
   lcs: raw => {
     const t = T(raw)

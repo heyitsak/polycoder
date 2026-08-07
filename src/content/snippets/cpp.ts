@@ -2,16 +2,20 @@ import type { Template } from '../lib'
 
 type B = (p: any) => Template
 
-function w(program: string): Template {
-  return {
-    starter: program.replace('//__SOLVE__', '    // TODO: solve it!'),
-    solution: program,
-  }
+function w(solution: string, skeleton?: string): Template {
+  return { starter: skeleton ?? solution, solution }
 }
 
 const nArr = `    vector<int> arr(n);
     for (int i = 0; i < n; i++) cin >> arr[i];
 `
+const MAIN = `#include <iostream>
+using namespace std;
+
+int main() {
+`
+const END = `    return 0;
+}`
 
 export const cppSnips: Record<string, B> = {
   hello: () => w(`#include <iostream>
@@ -22,7 +26,8 @@ int main() {
     return 0;
 }`),
 
-  sum2: () => w(`#include <iostream>
+  sum2: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -30,9 +35,15 @@ int main() {
     cin >> a >> b;
     cout << a + b << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int a, b;
+    cin >> a >> b;
+    // TODO: print a + b
+${END}`,
+  ),
 
-  sum1toN: () => w(`#include <iostream>
+  sum1toN: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -41,9 +52,15 @@ int main() {
     for (int i = 1; i <= n; i++) sum += i;
     cout << sum << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print the sum 1 + 2 + ... + n
+${END}`,
+  ),
 
-  maxIn: () => w(`#include <iostream>
+  maxIn: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -54,9 +71,15 @@ ${nArr}    int m = arr[0];
     for (int v : arr) if (v > m) m = v;
     cout << m << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+${nArr}    // TODO: print the largest value in arr
+${END}`,
+  ),
 
-  minIn: () => w(`#include <iostream>
+  minIn: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -67,9 +90,15 @@ ${nArr}    int m = arr[0];
     for (int v : arr) if (v < m) m = v;
     cout << m << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+${nArr}    // TODO: print the smallest value in arr
+${END}`,
+  ),
 
-  countEven: () => w(`#include <iostream>
+  countEven: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -79,9 +108,15 @@ int main() {
 ${nArr}    for (int v : arr) if (v % 2 == 0) c++;
     cout << c << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+${nArr}    // TODO: print how many values in arr are even
+${END}`,
+  ),
 
-  reverseList: () => w(`#include <iostream>
+  reverseList: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -94,9 +129,15 @@ ${nArr}    for (int i = n - 1; i >= 0; i--) {
     }
     cout << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+${nArr}    // TODO: print arr in reverse order, space-separated
+${END}`,
+  ),
 
-  vowel: () => w(`#include <iostream>
+  vowel: () => w(
+    `#include <iostream>
 #include <string>
 using namespace std;
 
@@ -108,9 +149,15 @@ int main() {
         if (string("aeiouAEIOU").find(ch) != string::npos) c++;
     cout << c << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    string s;
+    cin >> s;
+    // TODO: print the number of vowels (a, e, i, o, u) in s
+${END}`,
+  ),
 
-  isPalindrome: () => w(`#include <iostream>
+  isPalindrome: () => w(
+    `#include <iostream>
 #include <string>
 using namespace std;
 
@@ -122,9 +169,15 @@ int main() {
         if (s[i] != s[n - 1 - i]) { ok = 0; break; }
     cout << (ok ? "yes" : "no") << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    string s;
+    cin >> s;
+    // TODO: print "yes" if s reads the same backwards, else "no"
+${END}`,
+  ),
 
-  fibN: () => w(`#include <iostream>
+  fibN: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -134,9 +187,15 @@ int main() {
     for (int i = 0; i < n; i++) { long long c = a + b; a = b; b = c; }
     cout << a << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print the n-th Fibonacci number (0, 1, 1, 2, 3, ...)
+${END}`,
+  ),
 
-  isPrime: () => w(`#include <iostream>
+  isPrime: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -147,9 +206,15 @@ int main() {
         if (n % d == 0) ok = 0;
     cout << (ok ? "prime" : "not prime") << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print "prime" if n is prime, else "not prime"
+${END}`,
+  ),
 
-  fizzbuzz: () => w(`#include <iostream>
+  fizzbuzz: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -162,9 +227,15 @@ int main() {
         else cout << i << endl;
     }
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: for each i in 1..n print FizzBuzz / Fizz / Buzz / i
+${END}`,
+  ),
 
-  timesTable: () => w(`#include <iostream>
+  timesTable: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -172,9 +243,15 @@ int main() {
     cin >> n;
     for (int i = 1; i <= 10; i++) cout << n << " x " << i << " = " << n * i << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print the 1..10 times table for n
+${END}`,
+  ),
 
-  triangle: () => w(`#include <iostream>
+  triangle: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -185,9 +262,15 @@ int main() {
         cout << endl;
     }
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print n rows of stars (a right triangle)
+${END}`,
+  ),
 
-  evenOdd: () => w(`#include <iostream>
+  evenOdd: () => w(
+    `#include <iostream>
 using namespace std;
 
 int main() {
@@ -195,9 +278,15 @@ int main() {
     cin >> n;
     cout << (n % 2 == 0 ? "even" : "odd") << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n;
+    cin >> n;
+    // TODO: print "even" or "odd"
+${END}`,
+  ),
 
-  binarySearch: () => w(`#include <iostream>
+  binarySearch: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -213,9 +302,16 @@ ${nArr}    cin >> q;
     }
     cout << ans << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n, q;
+    cin >> n;
+${nArr}    cin >> q;
+    // TODO: binary search arr for q, print its index or -1
+${END}`,
+  ),
 
-  twoSum: () => w(`#include <iostream>
+  twoSum: () => w(
+    `#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -231,5 +327,11 @@ ${nArr}    cin >> t;
             }
     if (!found) cout << -1 << endl;
     return 0;
-}`),
+}`,
+    `${MAIN}    int n, t, found = 0;
+    cin >> n;
+${nArr}    cin >> t;
+    // TODO: find i < j with arr[i] + arr[j] == t, print "i j" or -1
+${END}`,
+  ),
 }

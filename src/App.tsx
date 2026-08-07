@@ -1,10 +1,12 @@
+import { Suspense, lazy } from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { useStore } from './lib/store'
-import TracksHub from './pages/TracksHub'
-import TrackMap from './pages/TrackMap'
-import LevelScreen from './pages/LevelScreen'
-import SemesterMap from './pages/SemesterMap'
-import Dashboard from './pages/Dashboard'
+
+const TracksHub = lazy(() => import('./pages/TracksHub'))
+const TrackMap = lazy(() => import('./pages/TrackMap'))
+const LevelScreen = lazy(() => import('./pages/LevelScreen'))
+const SemesterMap = lazy(() => import('./pages/SemesterMap'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
 
 const nav = [
   { to: '/semesters', label: '🗺️ Semester Map' },
@@ -43,14 +45,16 @@ export default function App() {
         </div>
       </aside>
       <main className="flex-1 overflow-y-auto">
-        <Routes>
-          <Route path="/" element={<TracksHub />} />
-          <Route path="/semesters" element={<SemesterMap />} />
-          <Route path="/tracks" element={<TracksHub />} />
-          <Route path="/track/:trackId" element={<TrackMap />} />
-          <Route path="/track/:trackId/level/:levelId" element={<LevelScreen />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
+        <Suspense fallback={<div className="p-8 text-slate-500">Loading…</div>}>
+          <Routes>
+            <Route path="/" element={<TracksHub />} />
+            <Route path="/semesters" element={<SemesterMap />} />
+            <Route path="/tracks" element={<TracksHub />} />
+            <Route path="/track/:trackId" element={<TrackMap />} />
+            <Route path="/track/:trackId/level/:levelId" element={<LevelScreen />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </Suspense>
       </main>
     </div>
   )

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react'
 import type { Level, Track } from '../types'
+import { TRACKS } from '../content'
 
 export interface LevelStat {
   status: 'pass' | 'placed' | 'none'
@@ -282,6 +283,9 @@ function unlockAchievements(s: GlobalState) {
   if (h >= 4 && h < 9) add('early_bird')
   const allStats = Object.values(s.trackMeta).flatMap(tp => Object.values(tp.stats))
   if (allStats.filter(st => st.status === 'pass' && st.firstTry).length >= 10) add('perfectionist')
+  const lvlById = new Map<string, Level['type']>()
+  for (const tr of TRACKS) for (const l of tr.levels) lvlById.set(l.id, l.type)
+  if (s.levelHistory.some(h => lvlById.get(h.levelId) === 'boss')) add('boss_slayer')
 }
 
 export function useStore(): StoreApi {

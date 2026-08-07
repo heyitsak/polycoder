@@ -240,7 +240,16 @@ export interface FixSpecInput {
   hidden: string[]
 }
 
+const DEFAULT_FIX_INPUTS: Partial<Record<RefKey, { samples: string[]; hidden: string[] }>> = {
+  isPrime: { samples: ['7', '10'], hidden: ['2', '1', '0', '97', '1000000'] },
+  vowel: { samples: ['hello', 'AEIOU'], hidden: ['Python', 'xyz', 'programming'] },
+  sum2: { samples: ['5 7'], hidden: ['0 0', '-5 9', '999999 1'] },
+}
+
 export function fixLevel(s: FixSpecInput): Level {
+  const d = DEFAULT_FIX_INPUTS[s.archetype] ?? { samples: ['1'], hidden: ['1'] }
+  const samples = s.samples ?? d.samples
+  const hidden = s.hidden ?? d.hidden
   return {
     id: `${s.lang}-${s.topic}-fix-${slug(s.title)}`,
     topic: s.topic,
@@ -255,8 +264,8 @@ export function fixLevel(s: FixSpecInput): Level {
     starterCode: s.buggy,
     modelSolution: s.solution,
     hints: HINT_TEMPLATE,
-    sampleTests: testsFor(s.archetype, s.samples),
-    hiddenTests: testsFor(s.archetype, s.hidden),
+    sampleTests: testsFor(s.archetype, samples),
+    hiddenTests: testsFor(s.archetype, hidden),
     fix: { buggy: s.buggy, bugCount: s.bugs.length, bugs: s.bugs },
   }
 }

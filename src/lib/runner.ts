@@ -1,95 +1,132 @@
 import type { RunnerRequest, RunnerResult } from '../types'
 
-const PISTON = 'https://emkc.org/api/v2/piston'
+/**
+ * Execution backends.
+ * - `wandbox` (default): free public compiler API, no key.
+ * - Own Piston instance: public emkc API is whitelist-only since 2026-02-15,
+ *   so self-host one and point VITE_RUNNER=piston + VITE_RUNNER at it.
+ */
+const WB_ENDPOINT = 'https://wandbox.org/api/compile.json'
+const PISTON_URL = (import.meta.env.VITE_PISTON_URL as string | undefined) ?? ''
 
-const FILE_NAMES: Record<string, string> = {
+const WB_COMPILERS: Record<string, string> = {
+  c: 'gcc-10.5.0-c',
+  cpp: 'gcc-12.3.0',
+  java: 'openjdk-jdk-21+35',
+  python: 'cpython-3.11.10',
+  js: 'nodejs-18.20.4',
+}
+
+const PISTON_FILES: Record<string, string> = {
   c: 'main.c',
   cpp: 'main.cpp',
   java: 'Main.java',
   python: 'main.py',
-  javascript: 'main.js',
-  sql: 'main.sql',
+  js: 'main.js',
 }
 
-let runtimesCache: Record<string, string> | null = null
+function abort(ms: number): AbortSignal {
+  return AbortSignal.timeout(Math.max(2000, ms))
+}
 
-export async function getRuntimes(force = false): Promise<Record<string, string>> {
-  if (runtimesCache && !force) return runtimesCache
+interface WandboxResult {
+  status: number
+  compiler_message?: string
+  program_output?: string
+  program_error?: string
+  signal?: string
+}
+
+async function runWandbox(req: RunnerRequest): Promise<RunnerResult> {
+  const compiler = WB_COMPILERS[req.lang]
+  const limitMs = req.timeLimitMs ?? 3000
+  const t0 = performance.now()
   try {
-    const res = await fetch(`${PISTON}/runtimes`, { signal: AbortSignal.timeout(8000) })
-    if (!res.ok) throw new Error('bad')
-    const list: { language: string; version: string }[] = await res.json()
-    const want = ['python', 'javascript', 'java', 'c', 'c++']
-    const map: Record<string, string> = {}
-    for (const w of want) {
-      const found = list.find(r => r.language === w)
-      if (found) map[w] = found.version
+    const res = await fetch(WB_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ compiler, code: req.code, stdin: req.stdin ?? '' }),
+      signal: abort(Math.max(20000, limitMs + 10000)),
+    })
+    const elapsed = performance.now() - t0
+    if (!res.ok) {
+      return { ok: false, stdout: '', stderr: `HTTP ${res.status} from code runner`, combined: '', fatal: 'runner_http' }
     }
-    runtimesCache = map
-    return map
-  } catch {
-    runtimesCache = {
-      c: '10.2.0',
-      'c++': '10.2.0',
-      java: '15.0.2',
-      python: '3.10.0',
-      javascript: '18.15.0',
+    const d = (await res.json()) as WandboxResult
+    if (d.status !== 0) {
+      return { ok: false, stdout: d.program_output ?? '', stderr: d.compiler_message ?? `status ${d.status}`, combined: d.compiler_message ?? '', fatal: 'compile' }
     }
-    return runtimesCache
+    const stdout = d.program_output ?? ''
+    const stderr = (d.program_error ?? '') + (d.signal ? `\n[${d.signal}]` : '')
+    return {
+      ok: !d.signal,
+      stdout,
+      stderr,
+      combined: stdout + '\n' + stderr,
+      timedOut: d.signal === 'SIGKILL',
+      timeMs: elapsed,
+    }
+  } catch (e: any) {
+    return {
+      ok: false,
+      stdout: '',
+      stderr: e?.name === 'TimeoutError' ? '⏱ timed out (execution limit)' : `Network error: ${e?.message ?? e}`,
+      combined: '',
+      timedOut: e?.name === 'TimeoutError',
+      fatal: 'network',
+    }
   }
 }
 
-export function runtimeAlias(lang: string): string {
-  if (lang === 'cpp') return 'c++'
-  return lang
-}
-
-export function fileName(lang: string): string {
-  return FILE_NAMES[lang] ?? 'main.txt'
-}
-
-export async function runCode(req: RunnerRequest): Promise<RunnerResult> {
-  const lang = runtimeAlias(req.lang)
-  const runtimes = await getRuntimes()
-  const version = runtimes[lang]
+async function runPiston(req: RunnerRequest): Promise<RunnerResult> {
+  const langMap: Record<string, string> = { js: 'javascript', cpp: 'c++', python: 'python', c: 'c', java: 'java' }
+  const lang = langMap[req.lang] ?? req.lang
+  const filename = PISTON_FILES[req.lang] ?? 'main.txt'
   const limitMs = req.timeLimitMs ?? 3000
   const t0 = performance.now()
-  let timedOut = false
   try {
-    const res = await fetch(`${PISTON}/execute`, {
+    const res = await fetch(`${PISTON_URL}/execute`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         language: lang,
-        version,
-        files: [{ name: fileName(req.lang), content: req.code }],
-        stdin: req.stdin,
-        compile_timeout: limitMs,
+        files: [{ name: filename, content: req.code }],
+        stdin: req.stdin ?? '',
         run_timeout: limitMs,
       }),
-      signal: AbortSignal.timeout(16000),
+      signal: abort(16000),
     })
     const elapsed = performance.now() - t0
     if (!res.ok) {
       return { ok: false, stdout: '', stderr: `HTTP ${res.status} from code runner`, combined: '', fatal: 'runner_http' }
     }
     const data = await res.json()
+    if (data.message) return { ok: false, stdout: '', stderr: String(data.message), combined: '', fatal: 'runner_http' }
     const run = data.run ?? {}
     const compile = data.compile ?? {}
     const stdout = run.stdout ?? ''
-    let stderr = (run.stderr ?? '') + (compile.stderr ?? '')
-    timedOut = run.signal === 'SIGKILL'
+    const stderr = (run.stderr ?? '') + (compile.stderr ?? '')
     return {
       ok: run.code === 0 && stderr.trim() === '',
       stdout,
       stderr,
       combined: stdout + '\n' + stderr,
       code: run.code,
-      timedOut,
+      timedOut: run.signal === 'SIGKILL',
       timeMs: elapsed,
-      compileTimeMs: compile.time ?? undefined,
     }
   } catch (e: any) {
-    return { ok: false, stdout: '', stderr: e?.name === 'TimeoutError' ? 'NETWORK TIMEOUT' : `Network error: ${e?.message ?? e}`, combined: '', fatal: 'network' }
+    return {
+      ok: false,
+      stdout: '',
+      stderr: e?.name === 'TimeoutError' ? 'NETWORK TIMEOUT' : `Network error: ${e?.message ?? e}`,
+      combined: '',
+      fatal: 'network',
+    }
   }
+}
+
+export async function runCode(req: RunnerRequest): Promise<RunnerResult> {
+  const backend = (import.meta.env.VITE_RUNNER ?? 'wandbox') as 'wandbox' | 'piston'
+  return backend === 'piston' && PISTON_URL ? runPiston(req) : runWandbox(req)
 }

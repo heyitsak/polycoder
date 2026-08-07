@@ -56,7 +56,7 @@ export const dsaLevels: Level[] = [
     diff: 'easy', minutes: 8, theory: STR, complexity: 'O(n log n)' }),
   L({ archetype: 'longest', topic: 'strings', title: 'Longest Unique Substring',
     story: 'Sliding window: the longest substring with no repeated character.',
-    samples: ['abcabcbb'], hidden: ['bbbbb', 'pwwkew', 'abcdef', ''],
+    samples: ['abcabcbb'], hidden: ['bbbbb', 'pwwkew', 'abcdef', 'abba'],
     diff: 'hard', minutes: 15, theory: STR, complexity: 'O(n)' }),
 
   L({ archetype: 'binarySearch', topic: 'search', title: 'Binary Search',

@@ -2,40 +2,50 @@ import type { Template } from '../lib'
 
 type B = (p: any) => Template
 
-function w(program: string): Template {
-  return {
-    starter: program.replace('//__SOLVE__', '        // TODO: solve it!'),
-    solution: program,
-  }
+function w(solution: string, skeleton?: string): Template {
+  return { starter: skeleton ?? solution, solution }
 }
 
 const nArr = `        int n = sc.nextInt();
         int[] arr = new int[n];
         for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
 `
+const MAIN = `import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+`
 
 export const javaSnips: Record<string, B> = {
   hello: () => w(`import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         System.out.println("Hello, Coder!");
     }
 }`),
 
-  sum2: () => w(`import java.util.*;
+  sum2: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt(), b = sc.nextInt();
         System.out.println(a + b);
     }
-}`),
+}`,
+    `${MAIN}        int a = sc.nextInt(), b = sc.nextInt();
+        // TODO: print a + b
+    }
+}`,
+  ),
 
-  sum1toN: () => w(`import java.util.*;
+  sum1toN: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -43,44 +53,65 @@ public class Main {
         for (int i = 1; i <= n; i++) sum += i;
         System.out.println(sum);
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print the sum 1 + 2 + ... + n
+    }
+}`,
+  ),
 
-  maxIn: () => w(`import java.util.*;
+  maxIn: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        int m = arr[0];
         for (int v : arr) if (v > m) m = v;
         System.out.println(m);
     }
-}`),
+}`,
+    `${MAIN}${nArr}        // TODO: print the largest value in arr
+    }
+}`,
+  ),
 
-  minIn: () => w(`import java.util.*;
+  minIn: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        int m = arr[0];
         for (int v : arr) if (v < m) m = v;
         System.out.println(m);
     }
-}`),
+}`,
+    `${MAIN}${nArr}        // TODO: print the smallest value in arr
+    }
+}`,
+  ),
 
-  countEven: () => w(`import java.util.*;
+  countEven: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        int c = 0;
         for (int v : arr) if (v % 2 == 0) c++;
         System.out.println(c);
     }
-}`),
+}`,
+    `${MAIN}${nArr}        // TODO: print how many values in arr are even
+    }
+}`,
+  ),
 
-  reverseList: () => w(`import java.util.*;
+  reverseList: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        StringBuilder sb = new StringBuilder();
@@ -90,11 +121,16 @@ ${nArr}        StringBuilder sb = new StringBuilder();
         }
         System.out.println(sb);
     }
-}`),
+}`,
+    `${MAIN}${nArr}        // TODO: print arr in reverse order, space-separated
+    }
+}`,
+  ),
 
-  vowel: () => w(`import java.util.*;
+  vowel: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
@@ -105,22 +141,34 @@ public class Main {
         }
         System.out.println(c);
     }
-}`),
+}`,
+    `${MAIN}        String s = sc.next();
+        // TODO: print the number of vowels (a, e, i, o, u) in s
+    }
+}`,
+  ),
 
-  isPalindrome: () => w(`import java.util.*;
+  isPalindrome: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.next();
         String rev = new StringBuilder(s).reverse().toString();
         System.out.println(s.equals(rev) ? "yes" : "no");
     }
-}`),
+}`,
+    `${MAIN}        String s = sc.next();
+        // TODO: print "yes" if s reads the same backwards, else "no"
+    }
+}`,
+  ),
 
-  fibN: () => w(`import java.util.*;
+  fibN: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -128,11 +176,17 @@ public class Main {
         for (int i = 0; i < n; i++) { long c = a + b; a = b; b = c; }
         System.out.println(a);
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print the n-th Fibonacci number (0, 1, 1, 2, 3, ...)
+    }
+}`,
+  ),
 
-  isPrime: () => w(`import java.util.*;
+  isPrime: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -141,11 +195,17 @@ public class Main {
         for (int d = 2; d * d <= n; d++) if (n % d == 0) { ok = false; break; }
         System.out.println(ok ? "prime" : "not prime");
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print "prime" if n is prime, else "not prime"
+    }
+}`,
+  ),
 
-  fizzbuzz: () => w(`import java.util.*;
+  fizzbuzz: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -156,21 +216,33 @@ public class Main {
             else System.out.println(i);
         }
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: for each i in 1..n print FizzBuzz / Fizz / Buzz / i
+    }
+}`,
+  ),
 
-  timesTable: () => w(`import java.util.*;
+  timesTable: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         for (int i = 1; i <= 10; i++) System.out.println(n + " x " + i + " = " + n * i);
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print the 1..10 times table for n
+    }
+}`,
+  ),
 
-  triangle: () => w(`import java.util.*;
+  triangle: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -179,21 +251,33 @@ public class Main {
             System.out.println();
         }
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print n rows of stars (a right triangle)
+    }
+}`,
+  ),
 
-  evenOdd: () => w(`import java.util.*;
+  evenOdd: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         System.out.println(n % 2 == 0 ? "even" : "odd");
     }
-}`),
+}`,
+    `${MAIN}        int n = sc.nextInt();
+        // TODO: print "even" or "odd"
+    }
+}`,
+  ),
 
-  binarySearch: () => w(`import java.util.*;
+  binarySearch: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        int q = sc.nextInt();
@@ -205,11 +289,17 @@ ${nArr}        int q = sc.nextInt();
         }
         System.out.println(ans);
     }
-}`),
+}`,
+    `${MAIN}${nArr}        int q = sc.nextInt();
+        // TODO: binary search arr for q, print its index or -1
+    }
+}`,
+  ),
 
-  twoSum: () => w(`import java.util.*;
+  twoSum: () => w(
+    `import java.util.*;
 
-public class Main {
+class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 ${nArr}        int t = sc.nextInt();
@@ -224,5 +314,10 @@ ${nArr}        int t = sc.nextInt();
         }
         if (!found) System.out.println("-1");
     }
-}`),
+}`,
+    `${MAIN}${nArr}        int t = sc.nextInt();
+        // TODO: find i < j with arr[i] + arr[j] == t, print "i j" or -1
+    }
+}`,
+  ),
 }

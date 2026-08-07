@@ -1,11 +1,16 @@
-import initSqlJs, { type Database, type SqlJsStatic } from 'sql.js'
+import type { Database } from 'sql.js'
 import sqlWasmUrl from 'sql.js/dist/sql-wasm.wasm?url'
 
-let sql: SqlJsStatic | null = null
+interface SqlJsModule {
+  Database: new () => Database
+}
+
+let sql: SqlJsModule | null = null
 
 export async function initSql() {
   if (!sql) {
-    sql = await initSqlJs({ locateFile: () => sqlWasmUrl })
+    const m = await import('sql.js')
+    sql = await m.default({ locateFile: () => sqlWasmUrl })
   }
   return sql
 }
