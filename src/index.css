@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night-950: #0b0e14;
+  --color-night-900: #11151f;
+  --color-night-800: #1a2030;
+  --color-night-700: #242c40;
+  --color-night-600: #33405c;
+  --color-accent-400: #22d3ee;
+  --color-accent-500: #06b6d4;
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-night-950);
+  color: #e2e8f0;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-night-900); }
+::-webkit-scrollbar-thumb { background: var(--color-night-600); border-radius: 6px; }
+
+.confetti-piece {
+  position: absolute;
+  top: -12px;
+  animation-name: confetti-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  transform: rotate(0deg);
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) var(--spin, rotate(360deg)); opacity: 0.9; }
+}
