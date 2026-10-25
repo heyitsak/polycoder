@@ -1,5 +1,9 @@
 # PolyCoder — Zero → Grandmaster
 
+[![CI Verification](https://github.com/heyitsak/polycoder/actions/workflows/ci.yml/badge.svg)](https://github.com/heyitsak/polycoder/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat-square&logo=typescript)](package.json)
+
 A solo coding-learning webapp for a polytechnic CSE student. 7 tracks (C, C++, Java, Python, JavaScript, SQL, DSA) with 0→Grandmaster ranks, a semester map, and full gamification — no login required.
 
 ## Run
