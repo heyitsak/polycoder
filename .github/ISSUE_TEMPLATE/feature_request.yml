@@ -1,0 +1,12 @@
+name: 🚀 Feature Request
+description: Suggest a new language track or gameplay feature for PolyCoder
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: Feature Description
+      description: Describe your proposed track or capability.
+    validations:
+      required: true
