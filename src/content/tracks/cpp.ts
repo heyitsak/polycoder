@@ -146,4 +146,8 @@ int main() {
     code: "int a = 42;\\nint *p = &a;\\n*p = 100;\\ncout << a << endl;",
     choices: ["100", "42", "0", "Memory address"], answerIndex: 0,
     explain: "*p dereferences pointer p and mutates the memory location of a to 100." }),
+  Tr({ topic: 'arrays', title: 'Trace: std::vector dynamic resizing',
+    code: "vector<int> v = {1, 2, 3};\\nv.push_back(4);\\nv.pop_back();\\ncout << v.size() << ' ' << v.back();",
+    choices: ["3 3", "4 4", "3 4", "4 3"], answerIndex: 0,
+    explain: "push_back(4) makes size 4, pop_back() removes 4 returning size to 3. v.back() is now 3." }),
 ]
