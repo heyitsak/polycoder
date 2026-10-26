@@ -150,4 +150,8 @@ console.log(c);`,
     code: "let s = 0;\\nfor (const [i, v] of ['a', 'b', 'c'].entries()) {\\n  s += i;\\n}\\nconsole.log(s);",
     choices: ["3", "6", "0", "undefined"], answerIndex: 0,
     explain: "indices are 0, 1, 2. s = 0 + 1 + 2 = 3." }),
+  Tr({ topic: 'advanced', title: 'Trace: arrow function implicit return',
+    code: "const add = (a, b) => a + b;\\nconst wrap = x => ({ val: x * 2 });\\nconsole.log(add(3, 4), wrap(5).val);",
+    choices: ["7 10", "7 undefined", "NaN 10", "undefined undefined"], answerIndex: 0,
+    explain: "add implicitly returns 3 + 4 = 7. wrap wrapped in parens returns an object { val: 10 }." }),
 ]
