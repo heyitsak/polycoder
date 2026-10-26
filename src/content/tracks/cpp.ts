@@ -166,4 +166,8 @@ int main() {
     code: "string s = 'HelloCpp';\\ncout << s.substr(5, 3);",
     choices: ["Cpp", "loC", "Hello", "Cpp0"], answerIndex: 0,
     explain: "substr(start, length): start index 5 is 'C', taking 3 characters yields 'Cpp'." }),
+  Tr({ topic: 'advanced', title: 'Trace: std::pair access',
+    code: "pair<int, string> p = {404, 'Not Found'};\\ncout << p.first << ': ' << p.second;",
+    choices: ["404: Not Found", "Not Found: 404", "404", "Error"], answerIndex: 0,
+    explain: "p.first accesses the integer member 404 and p.second accesses the string member 'Not Found'." }),
 ]
