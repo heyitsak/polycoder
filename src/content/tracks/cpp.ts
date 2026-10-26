@@ -170,4 +170,8 @@ int main() {
     code: "pair<int, string> p = {404, 'Not Found'};\\ncout << p.first << ': ' << p.second;",
     choices: ["404: Not Found", "Not Found: 404", "404", "Error"], answerIndex: 0,
     explain: "p.first accesses the integer member 404 and p.second accesses the string member 'Not Found'." }),
+  Tr({ topic: 'arrays', title: 'Trace: vector auto range-for',
+    code: "vector<int> v = {2, 3, 5};\\nint p = 1;\\nfor (int x : v) p *= x;\\ncout << p;",
+    choices: ["30", "10", "25", "1"], answerIndex: 0,
+    explain: "p accumulates product: 1 * 2 * 3 * 5 = 30." }),
 ]
