@@ -157,4 +157,8 @@ int main() {
     code: "int x = 10;\\ndo {\\n    x += 5;\\n} while (x < 10);\\nprintf('%d', x);",
     choices: ["15", "10", "20", "Infinite loop"], answerIndex: 0,
     explain: "do-while executes the loop body once before checking the condition. x becomes 15, then 15 < 10 is false." }),
+  Tr({ topic: 'arrays', title: 'Trace: 2D array row-major access',
+    code: "int m[2][3] = {{1, 2, 3}, {4, 5, 6}};\\nprintf('%d', m[1][0] + m[0][2]);",
+    choices: ["7", "6", "8", "9"], answerIndex: 0,
+    explain: "m[1][0] is 4 (second row, first col) and m[0][2] is 3 (first row, third col). 4 + 3 = 7." }),
 ]
