@@ -150,4 +150,8 @@ int main() {
     code: "vector<int> v = {1, 2, 3};\\nv.push_back(4);\\nv.pop_back();\\ncout << v.size() << ' ' << v.back();",
     choices: ["3 3", "4 4", "3 4", "4 3"], answerIndex: 0,
     explain: "push_back(4) makes size 4, pop_back() removes 4 returning size to 3. v.back() is now 3." }),
+  Tr({ topic: 'foundations', title: 'Trace: integer division truncation',
+    code: "int a = 7, b = 2;\\ncout << a / b << ' ' << a % b;",
+    choices: ["3 1", "3.5 1", "3 0", "4 1"], answerIndex: 0,
+    explain: "Integer division truncates decimals toward zero: 7 / 2 = 3. 7 % 2 remainder is 1." }),
 ]
