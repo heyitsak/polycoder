@@ -153,4 +153,8 @@ public class Main {
     code: "int[] vals = {3, 6, 9};\\nint tot = 0;\\nfor (int v : vals) {\\n    tot += v;\\n}\\nSystem.out.println(tot);",
     choices: ["18", "9", "15", "0"], answerIndex: 0,
     explain: "The loop visits 3, 6, 9 sequentially: 3 + 6 + 9 = 18." }),
+  Tr({ topic: 'conditions', title: 'Trace: short-circuit AND',
+    code: "int x = 5;\\nboolean res = (x < 3) && (++x > 5);\\nSystem.out.println(x + ' ' + res);",
+    choices: ["5 false", "6 false", "5 true", "6 true"], answerIndex: 0,
+    explain: "Since x < 3 is false, && short-circuits and skips ++x. x remains 5 and result is false." }),
 ]
