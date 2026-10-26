@@ -142,6 +142,10 @@ print(c)`,
     code: "def f(n):\\n    if n <= 1:\\n        return 1\\n    return n + f(n - 2)\\nprint(f(5))",
     choices: ["9", "15", "8", "10"], answerIndex: 0,
     explain: "f(5) = 5 + f(3) = 5 + 3 + f(1) = 5 + 3 + 1 = 9." }),
+  Tr({ topic: 'variables', title: 'Trace: tuple packing and unpacking',
+    code: "x, *rest, y = [10, 20, 30, 40, 50]\\nprint(x, y, len(rest))",
+    choices: ["10 50 3", "10 50 5", "10 40 3", "10 20 3"], answerIndex: 0,
+    explain: "x takes 10, y takes 50, and rest collects the middle elements [20, 30, 40], so len(rest) is 3." }),
 ]
 
 export const pythonTopics = [
