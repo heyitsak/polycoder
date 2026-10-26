@@ -134,6 +134,10 @@ print(c)`,
     code: "nums = [1, 2, 3, 4, 5, 6]\\nev = [x * 2 for x in nums if x % 2 == 0]\\nprint(ev)",
     choices: ["[4, 8, 12]", "[2, 4, 6]", "[4, 6, 8]", "[2, 8, 12]"], answerIndex: 0,
     explain: "The if condition keeps even numbers (2, 4, 6), and x * 2 multiplies them by 2 yielding [4, 8, 12]." }),
+  Tr({ topic: 'variables', title: 'Trace: dictionary get with default',
+    code: "d = {'a': 1, 'b': 2}\\nprint(d.get('c', 0) + d.get('a', 0))",
+    choices: ["1", "0", "3", "Error"], answerIndex: 0,
+    explain: "d.get('c', 0) returns 0 since 'c' is absent, and d.get('a', 0) returns 1. 0 + 1 = 1." }),
 ]
 
 export const pythonTopics = [
