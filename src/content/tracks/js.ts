@@ -146,4 +146,8 @@ console.log(c);`,
     code: "const a = ('5' == 5);\\nconst b = ('5' === 5);\\nconsole.log(a, b);",
     choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
     explain: "== coerces type so '5' == 5 is true, while === requires matching types (string vs number) so it is false." }),
+  Tr({ topic: 'loops', title: 'Trace: for-of array index iteration',
+    code: "let s = 0;\\nfor (const [i, v] of ['a', 'b', 'c'].entries()) {\\n  s += i;\\n}\\nconsole.log(s);",
+    choices: ["3", "6", "0", "undefined"], answerIndex: 0,
+    explain: "indices are 0, 1, 2. s = 0 + 1 + 2 = 3." }),
 ]
