@@ -141,4 +141,8 @@ public class Main {
     code: "String s1 = 'java';\\nString s2 = 'java';\\nString s3 = new String('java');\\nSystem.out.println((s1 == s2) + ' ' + (s1 == s3));",
     choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
     explain: "s1 and s2 refer to the same literal in the String pool (== true). s3 is a new heap object (== false)." }),
+  Tr({ topic: 'arrays', title: 'Trace: array length attribute',
+    code: "int[] arr = new int[4];\\nString s = 'code';\\nSystem.out.println(arr.length + ' ' + s.length());",
+    choices: ["4 4", "4 5", "3 4", "3 3"], answerIndex: 0,
+    explain: "Java arrays use the .length property, while String uses the .length() method. Both are 4." }),
 ]
