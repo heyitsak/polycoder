@@ -118,4 +118,8 @@ console.log(c);`,
     code: "const nums = [1, 2, 3, 4];\\nconst res = nums.filter(n => n % 2 !== 0).map(n => n * 3);\\nconsole.log(res.join(' '));",
     choices: ["3 9", "6 12", "1 3", "3 6 9 12"], answerIndex: 0,
     explain: "filter keeps [1, 3], then map multiplies each by 3 yielding [3, 9]." }),
+  Tr({ topic: 'variables', title: 'Trace: object spread overrides',
+    code: "const a = { x: 1, y: 2 };\\nconst b = { ...a, y: 99, z: 3 };\\nconsole.log(b.x + b.y);",
+    choices: ["100", "3", "102", "NaN"], answerIndex: 0,
+    explain: "The spread sets y to 2, then y: 99 overwrites it with 99. b.x (1) + b.y (99) = 100." }),
 ]
