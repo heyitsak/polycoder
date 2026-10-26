@@ -126,4 +126,8 @@ console.log(c);`,
     code: "function makeCounter() {\\n  let c = 0;\\n  return () => ++c;\\n}\\nconst count = makeCounter();\\ncount();\\nconsole.log(count());",
     choices: ["2", "1", "0", "undefined"], answerIndex: 0,
     explain: "The enclosed variable c retains state: first call increments to 1, second increments to 2." }),
+  Tr({ topic: 'conditions', title: 'Trace: nullish coalescing',
+    code: "const val = 0 ?? 42;\\nconst fallback = null ?? 42;\\nconsole.log(val, fallback);",
+    choices: ["0 42", "42 42", "0 null", "undefined 42"], answerIndex: 0,
+    explain: "?? only triggers on null and undefined. 0 is defined, so 0 is kept, while null falls back to 42." }),
 ]
