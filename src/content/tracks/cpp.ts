@@ -154,4 +154,8 @@ int main() {
     code: "int a = 7, b = 2;\\ncout << a / b << ' ' << a % b;",
     choices: ["3 1", "3.5 1", "3 0", "4 1"], answerIndex: 0,
     explain: "Integer division truncates decimals toward zero: 7 / 2 = 3. 7 % 2 remainder is 1." }),
+  Tr({ topic: 'loops', title: 'Trace: pre vs post increment',
+    code: "int a = 5, b = 5;\\nint x = ++a;\\nint y = b++;\\ncout << x << ' ' << y;",
+    choices: ["6 5", "6 6", "5 5", "5 6"], answerIndex: 0,
+    explain: "++a increments then yields 6. b++ yields current value 5 then increments." }),
 ]
