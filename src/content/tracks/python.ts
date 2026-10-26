@@ -158,6 +158,10 @@ print(c)`,
     code: "parts = 'hello world python'.split()\\nprint('-'.join(parts[::-1]))",
     choices: ["python-world-hello", "hello-world-python", "python world hello", "olleh-dlrow-nohtyp"], answerIndex: 0,
     explain: "split() creates ['hello', 'world', 'python']. Reversing gives ['python', 'world', 'hello'], joined with dashes." }),
+  Tr({ topic: 'advanced', title: 'Trace: lambda mapping',
+    code: "f = lambda x: x ** 2 if x > 0 else 0\\nprint([f(-2), f(3)])",
+    choices: ["[0, 9]", "[4, 9]", "[0, 6]", "[-4, 9]"], answerIndex: 0,
+    explain: "f(-2) evaluates the else branch returning 0. f(3) squares 3 returning 9." }),
 ]
 
 export const pythonTopics = [
