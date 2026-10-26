@@ -174,4 +174,8 @@ int main() {
     code: "vector<int> v = {2, 3, 5};\\nint p = 1;\\nfor (int x : v) p *= x;\\ncout << p;",
     choices: ["30", "10", "25", "1"], answerIndex: 0,
     explain: "p accumulates product: 1 * 2 * 3 * 5 = 30." }),
+  Tr({ topic: 'advanced', title: 'Trace: ternary nested evaluation',
+    code: "int x = 12;\\nint res = (x > 20) ? 1 : (x > 10) ? 2 : 3;\\ncout << res;",
+    choices: ["2", "1", "3", "0"], answerIndex: 0,
+    explain: "x > 20 is false, so it checks (x > 10) which is true (12 > 10), yielding 2." }),
 ]
