@@ -157,4 +157,8 @@ public class Main {
     code: "int x = 5;\\nboolean res = (x < 3) && (++x > 5);\\nSystem.out.println(x + ' ' + res);",
     choices: ["5 false", "6 false", "5 true", "6 true"], answerIndex: 0,
     explain: "Since x < 3 is false, && short-circuits and skips ++x. x remains 5 and result is false." }),
+  Tr({ topic: 'foundations', title: 'Trace: string concatenation order',
+    code: "System.out.println(1 + 2 + 'Java' + 3 + 4);",
+    choices: ["3Java34", "12Java34", "3Java7", "12Java7"], answerIndex: 0,
+    explain: "1 + 2 evaluates numerically to 3. 3 + 'Java' produces '3Java'. Thereafter, + is string concatenation: '3Java' + 3 + 4 = '3Java34'." }),
 ]
