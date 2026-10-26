@@ -149,4 +149,8 @@ public class Main {
     code: "Integer a = 100, b = 100;\\nInteger c = 200, d = 200;\\nSystem.out.println((a == b) + ' ' + (c == d));",
     choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
     explain: "Java caches Integer objects between -128 and 127. Beyond 127, new objects are instantiated (== false)." }),
+  Tr({ topic: 'loops', title: 'Trace: enhanced for-each iteration',
+    code: "int[] vals = {3, 6, 9};\\nint tot = 0;\\nfor (int v : vals) {\\n    tot += v;\\n}\\nSystem.out.println(tot);",
+    choices: ["18", "9", "15", "0"], answerIndex: 0,
+    explain: "The loop visits 3, 6, 9 sequentially: 3 + 6 + 9 = 18." }),
 ]
