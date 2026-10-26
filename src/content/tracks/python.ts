@@ -146,6 +146,10 @@ print(c)`,
     code: "x, *rest, y = [10, 20, 30, 40, 50]\\nprint(x, y, len(rest))",
     choices: ["10 50 3", "10 50 5", "10 40 3", "10 20 3"], answerIndex: 0,
     explain: "x takes 10, y takes 50, and rest collects the middle elements [20, 30, 40], so len(rest) is 3." }),
+  Tr({ topic: 'loops', title: 'Trace: nested loop grid count',
+    code: "c = 0\\nfor i in range(3):\\n    for j in range(i):\\n        c += 1\\nprint(c)",
+    choices: ["3", "6", "4", "9"], answerIndex: 0,
+    explain: "For i=0: 0 times. For i=1: 1 time (j=0). For i=2: 2 times (j=0, 1). Total c = 0 + 1 + 2 = 3." }),
 ]
 
 export const pythonTopics = [
