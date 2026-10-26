@@ -130,6 +130,10 @@ print(c)`,
     code: "s = 'ABCDEF'\\nprint(s[::2])",
     choices: ["ACE", "BDF", "ABC", "FED"], answerIndex: 0,
     explain: "A step of 2 picks every second character starting at index 0: A, C, E." }),
+  Tr({ topic: 'arrays', title: 'Trace: list comprehension filtering',
+    code: "nums = [1, 2, 3, 4, 5, 6]\\nev = [x * 2 for x in nums if x % 2 == 0]\\nprint(ev)",
+    choices: ["[4, 8, 12]", "[2, 4, 6]", "[4, 6, 8]", "[2, 8, 12]"], answerIndex: 0,
+    explain: "The if condition keeps even numbers (2, 4, 6), and x * 2 multiplies them by 2 yielding [4, 8, 12]." }),
 ]
 
 export const pythonTopics = [
