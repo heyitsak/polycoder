@@ -162,6 +162,10 @@ print(c)`,
     code: "f = lambda x: x ** 2 if x > 0 else 0\\nprint([f(-2), f(3)])",
     choices: ["[0, 9]", "[4, 9]", "[0, 6]", "[-4, 9]"], answerIndex: 0,
     explain: "f(-2) evaluates the else branch returning 0. f(3) squares 3 returning 9." }),
+  Tr({ topic: 'conditions', title: 'Trace: chained comparison',
+    code: "x = 15\\nprint(10 < x < 20 and x != 15)",
+    choices: ["False", "True", "15", "None"], answerIndex: 0,
+    explain: "10 < x < 20 is True, but x != 15 is False. True and False is False." }),
 ]
 
 export const pythonTopics = [
