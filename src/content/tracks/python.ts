@@ -126,6 +126,10 @@ print(c)`,
     story: 'GRAND CHALLENGE: find two numbers in the list that add up to t and print their indexes.',
     samples: ['4\n2 7 11 15\n9'], hidden: ['3\n3 2 4\n6', '2\n3 3\n6', '5\n1 2 3 4 5\n10', '4\n-1 0 1 2\n0'],
     diff: 'hard', minutes: 15, xp: 30, boss: true, limitMs: 2000 }),
+  Tr({ topic: 'strings', title: 'Trace: string step slicing',
+    code: "s = 'ABCDEF'\\nprint(s[::2])",
+    choices: ["ACE", "BDF", "ABC", "FED"], answerIndex: 0,
+    explain: "A step of 2 picks every second character starting at index 0: A, C, E." }),
 ]
 
 export const pythonTopics = [
