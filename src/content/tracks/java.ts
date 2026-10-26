@@ -145,4 +145,8 @@ public class Main {
     code: "int[] arr = new int[4];\\nString s = 'code';\\nSystem.out.println(arr.length + ' ' + s.length());",
     choices: ["4 4", "4 5", "3 4", "3 3"], answerIndex: 0,
     explain: "Java arrays use the .length property, while String uses the .length() method. Both are 4." }),
+  Tr({ topic: 'variables', title: 'Trace: integer caching range',
+    code: "Integer a = 100, b = 100;\\nInteger c = 200, d = 200;\\nSystem.out.println((a == b) + ' ' + (c == d));",
+    choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
+    explain: "Java caches Integer objects between -128 and 127. Beyond 127, new objects are instantiated (== false)." }),
 ]
