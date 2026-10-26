@@ -162,4 +162,8 @@ int main() {
     code: "int n = 2, score = 0;\\nswitch(n) {\\n    case 1: score += 10; break;\\n    case 2: score += 20;\\n    case 3: score += 30; break;\\n    default: score += 5;\\n}\\ncout << score;",
     choices: ["50", "20", "30", "55"], answerIndex: 0,
     explain: "case 2 matches (+20) and falls through to case 3 (+30) because there is no break after case 2. Total is 50." }),
+  Tr({ topic: 'strings', title: 'Trace: string substr indexing',
+    code: "string s = 'HelloCpp';\\ncout << s.substr(5, 3);",
+    choices: ["Cpp", "loC", "Hello", "Cpp0"], answerIndex: 0,
+    explain: "substr(start, length): start index 5 is 'C', taking 3 characters yields 'Cpp'." }),
 ]
