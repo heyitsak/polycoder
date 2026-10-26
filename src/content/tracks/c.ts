@@ -149,4 +149,8 @@ int main() {
     code: "int flags = 0x05; // 0101\\nint mask = 0x04;  // 0100\\nprintf('%s', (flags & mask) ? 'YES' : 'NO');",
     choices: ["YES", "NO", "0", "1"], answerIndex: 0,
     explain: "0101 & 0100 is 0100 (non-zero 4), which evaluates to true, printing 'YES'." }),
+  Tr({ topic: 'foundations', title: 'Trace: sizeof array calculation',
+    code: "int nums[5] = {1, 2, 3, 4, 5};\\nint count = sizeof(nums) / sizeof(nums[0]);\\nprintf('%d', count);",
+    choices: ["5", "20", "4", "1"], answerIndex: 0,
+    explain: "sizeof(nums) is total bytes (5 * 4 = 20), divided by element size (4) gives 5 elements." }),
 ]
