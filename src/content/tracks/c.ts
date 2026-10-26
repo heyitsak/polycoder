@@ -141,4 +141,8 @@ int main() {
     code: "char s[] = 'Code\\\\0Forge';\\nprintf('%lu', (unsigned long)strlen(s));",
     choices: ["4", "9", "5", "10"], answerIndex: 0,
     explain: "strlen stops at the first null terminator byte \\\\0, so only 'Code' (length 4) is counted." }),
+  Tr({ topic: 'variables', title: 'Trace: static local variable',
+    code: "int tick() {\\n    static int count = 0;\\n    return ++count;\\n}\\nint main() {\\n    tick();\\n    printf('%d', tick());\\n}",
+    choices: ["2", "1", "0", "Undefined"], answerIndex: 0,
+    explain: "static local variables persist between function invocations. First tick() is 1, second is 2." }),
 ]
