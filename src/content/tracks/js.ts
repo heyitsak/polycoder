@@ -134,4 +134,8 @@ console.log(c);`,
     code: "const arr = [2, 4, 6];\\nconst sum = arr.reduce((acc, curr) => acc + curr, 10);\\nconsole.log(sum);",
     choices: ["22", "12", "10", "24"], answerIndex: 0,
     explain: "Initial accumulator is 10. Adding 2, 4, 6 gives 10 + 2 + 4 + 6 = 22." }),
+  Tr({ topic: 'strings', title: 'Trace: template literal expression',
+    code: "const name = 'JS';\\nconst score = 95;\\nconsole.log(`${name}:${score >= 90 ? 'A' : 'B'}`);",
+    choices: ["JS:A", "JS:B", "JS:95", "name:A"], answerIndex: 0,
+    explain: "The ternary expression evaluates to 'A' since 95 >= 90 is true." }),
 ]
