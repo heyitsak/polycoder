@@ -137,4 +137,8 @@ public class Main {
   L({ archetype: 'twoSum', topic: 'advanced', title: 'Boss: Two Sum',
     samples: ['4\n2 7 11 15\n9'], hidden: ['3\n3 2 4\n6', '2\n3 3\n6', '5\n1 2 3 4 5\n10', '4\n-1 0 1 2\n0'],
     diff: 'hard', minutes: 15, xp: 30, boss: true, limitMs: 2000 }),
+  Tr({ topic: 'strings', title: 'Trace: string pool equality',
+    code: "String s1 = 'java';\\nString s2 = 'java';\\nString s3 = new String('java');\\nSystem.out.println((s1 == s2) + ' ' + (s1 == s3));",
+    choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
+    explain: "s1 and s2 refer to the same literal in the String pool (== true). s3 is a new heap object (== false)." }),
 ]
