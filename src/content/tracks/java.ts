@@ -161,4 +161,8 @@ public class Main {
     code: "System.out.println(1 + 2 + 'Java' + 3 + 4);",
     choices: ["3Java34", "12Java34", "3Java7", "12Java7"], answerIndex: 0,
     explain: "1 + 2 evaluates numerically to 3. 3 + 'Java' produces '3Java'. Thereafter, + is string concatenation: '3Java' + 3 + 4 = '3Java34'." }),
+  Tr({ topic: 'advanced', title: 'Trace: ternary operator casting',
+    code: "int a = 10;\\ndouble res = (a > 5) ? 1 : 2.5;\\nSystem.out.println(res);",
+    choices: ["1.0", "1", "2.5", "10.0"], answerIndex: 0,
+    explain: "The conditional operator promotes the int 1 to double 1.0 to match the common type of the branches." }),
 ]
