@@ -137,4 +137,8 @@ int main() {
     code: "int arr[] = {10, 20, 30, 40};\\nint *p = arr;\\nprintf('%d %d', *p, *(p + 2));",
     choices: ["10 30", "10 20", "20 30", "10 40"], answerIndex: 0,
     explain: "*p is arr[0] (10). *(p + 2) shifts two elements ahead to arr[2] (30)." }),
+  Tr({ topic: 'strings', title: 'Trace: null terminator length',
+    code: "char s[] = 'Code\\\\0Forge';\\nprintf('%lu', (unsigned long)strlen(s));",
+    choices: ["4", "9", "5", "10"], answerIndex: 0,
+    explain: "strlen stops at the first null terminator byte \\\\0, so only 'Code' (length 4) is counted." }),
 ]
