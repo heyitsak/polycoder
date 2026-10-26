@@ -150,6 +150,10 @@ print(c)`,
     code: "c = 0\\nfor i in range(3):\\n    for j in range(i):\\n        c += 1\\nprint(c)",
     choices: ["3", "6", "4", "9"], answerIndex: 0,
     explain: "For i=0: 0 times. For i=1: 1 time (j=0). For i=2: 2 times (j=0, 1). Total c = 0 + 1 + 2 = 3." }),
+  Tr({ topic: 'arrays', title: 'Trace: set uniqueness and length',
+    code: "items = [1, 2, 2, 3, 1, 4]\\nprint(len(set(items)))",
+    choices: ["4", "6", "3", "5"], answerIndex: 0,
+    explain: "Sets eliminate duplicates. Unique elements are {1, 2, 3, 4}, so length is 4." }),
 ]
 
 export const pythonTopics = [
