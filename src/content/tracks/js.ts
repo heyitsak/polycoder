@@ -122,4 +122,8 @@ console.log(c);`,
     code: "const a = { x: 1, y: 2 };\\nconst b = { ...a, y: 99, z: 3 };\\nconsole.log(b.x + b.y);",
     choices: ["100", "3", "102", "NaN"], answerIndex: 0,
     explain: "The spread sets y to 2, then y: 99 overwrites it with 99. b.x (1) + b.y (99) = 100." }),
+  Tr({ topic: 'advanced', title: 'Trace: closure counter',
+    code: "function makeCounter() {\\n  let c = 0;\\n  return () => ++c;\\n}\\nconst count = makeCounter();\\ncount();\\nconsole.log(count());",
+    choices: ["2", "1", "0", "undefined"], answerIndex: 0,
+    explain: "The enclosed variable c retains state: first call increments to 1, second increments to 2." }),
 ]
