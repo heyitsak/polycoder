@@ -130,4 +130,8 @@ console.log(c);`,
     code: "const val = 0 ?? 42;\\nconst fallback = null ?? 42;\\nconsole.log(val, fallback);",
     choices: ["0 42", "42 42", "0 null", "undefined 42"], answerIndex: 0,
     explain: "?? only triggers on null and undefined. 0 is defined, so 0 is kept, while null falls back to 42." }),
+  Tr({ topic: 'arrays', title: 'Trace: array reduce sum',
+    code: "const arr = [2, 4, 6];\\nconst sum = arr.reduce((acc, curr) => acc + curr, 10);\\nconsole.log(sum);",
+    choices: ["22", "12", "10", "24"], answerIndex: 0,
+    explain: "Initial accumulator is 10. Adding 2, 4, 6 gives 10 + 2 + 4 + 6 = 22." }),
 ]
