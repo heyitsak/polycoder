@@ -114,4 +114,8 @@ console.log(c);`,
   L({ archetype: 'twoSum', topic: 'advanced', title: 'Boss: Two Sum',
     samples: ['4\n2 7 11 15\n9'], hidden: ['3\n3 2 4\n6', '2\n3 3\n6', '5\n1 2 3 4 5\n10', '4\n-1 0 1 2\n0'],
     diff: 'hard', minutes: 15, xp: 30, boss: true, limitMs: 2000 }),
+  Tr({ topic: 'arrays', title: 'Trace: array filter and map',
+    code: "const nums = [1, 2, 3, 4];\\nconst res = nums.filter(n => n % 2 !== 0).map(n => n * 3);\\nconsole.log(res.join(' '));",
+    choices: ["3 9", "6 12", "1 3", "3 6 9 12"], answerIndex: 0,
+    explain: "filter keeps [1, 3], then map multiplies each by 3 yielding [3, 9]." }),
 ]
