@@ -142,4 +142,8 @@ int main() {
     code: "void inc(int &n) { n += 5; }\\nint main() {\\n    int x = 10;\\n    inc(x);\\n    cout << x << endl;\\n}",
     choices: ["15", "10", "5", "0"], answerIndex: 0,
     explain: "Because int &n is a reference parameter, changes directly affect the caller argument x." }),
+  Tr({ topic: 'variables', title: 'Trace: pointer dereferencing',
+    code: "int a = 42;\\nint *p = &a;\\n*p = 100;\\ncout << a << endl;",
+    choices: ["100", "42", "0", "Memory address"], answerIndex: 0,
+    explain: "*p dereferences pointer p and mutates the memory location of a to 100." }),
 ]
