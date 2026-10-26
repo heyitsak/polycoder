@@ -138,6 +138,10 @@ print(c)`,
     code: "d = {'a': 1, 'b': 2}\\nprint(d.get('c', 0) + d.get('a', 0))",
     choices: ["1", "0", "3", "Error"], answerIndex: 0,
     explain: "d.get('c', 0) returns 0 since 'c' is absent, and d.get('a', 0) returns 1. 0 + 1 = 1." }),
+  Tr({ topic: 'advanced', title: 'Trace: recursion base case',
+    code: "def f(n):\\n    if n <= 1:\\n        return 1\\n    return n + f(n - 2)\\nprint(f(5))",
+    choices: ["9", "15", "8", "10"], answerIndex: 0,
+    explain: "f(5) = 5 + f(3) = 5 + 3 + f(1) = 5 + 3 + 1 = 9." }),
 ]
 
 export const pythonTopics = [
