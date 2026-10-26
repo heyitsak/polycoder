@@ -153,4 +153,8 @@ int main() {
     code: "int nums[5] = {1, 2, 3, 4, 5};\\nint count = sizeof(nums) / sizeof(nums[0]);\\nprintf('%d', count);",
     choices: ["5", "20", "4", "1"], answerIndex: 0,
     explain: "sizeof(nums) is total bytes (5 * 4 = 20), divided by element size (4) gives 5 elements." }),
+  Tr({ topic: 'loops', title: 'Trace: do-while condition evaluation',
+    code: "int x = 10;\\ndo {\\n    x += 5;\\n} while (x < 10);\\nprintf('%d', x);",
+    choices: ["15", "10", "20", "Infinite loop"], answerIndex: 0,
+    explain: "do-while executes the loop body once before checking the condition. x becomes 15, then 15 < 10 is false." }),
 ]
