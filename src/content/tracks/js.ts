@@ -142,4 +142,8 @@ console.log(c);`,
     code: "const a = [10, 20, 30, 40];\\nconst sub = a.slice(1, 3);\\nconsole.log(sub.length, a.length);",
     choices: ["2 4", "2 2", "3 4", "1 4"], answerIndex: 0,
     explain: "slice(1, 3) returns a new array with elements at index 1 and 2 (length 2) without mutating original a (length 4)." }),
+  Tr({ topic: 'foundations', title: 'Trace: loose vs strict equality',
+    code: "const a = ('5' == 5);\\nconst b = ('5' === 5);\\nconsole.log(a, b);",
+    choices: ["true false", "true true", "false false", "false true"], answerIndex: 0,
+    explain: "== coerces type so '5' == 5 is true, while === requires matching types (string vs number) so it is false." }),
 ]
