@@ -161,4 +161,8 @@ int main() {
     code: "int m[2][3] = {{1, 2, 3}, {4, 5, 6}};\\nprintf('%d', m[1][0] + m[0][2]);",
     choices: ["7", "6", "8", "9"], answerIndex: 0,
     explain: "m[1][0] is 4 (second row, first col) and m[0][2] is 3 (first row, third col). 4 + 3 = 7." }),
+  Tr({ topic: 'advanced', title: 'Trace: struct value copy',
+    code: "struct Point { int x, y; };\\nstruct Point p1 = {3, 4};\\nstruct Point p2 = p1;\\np2.x = 99;\\nprintf('%d %d', p1.x, p2.x);",
+    choices: ["3 99", "99 99", "3 4", "99 4"], answerIndex: 0,
+    explain: "In C, struct assignment copies by value. Modifying p2 does not affect p1." }),
 ]
