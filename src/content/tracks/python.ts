@@ -154,6 +154,10 @@ print(c)`,
     code: "items = [1, 2, 2, 3, 1, 4]\\nprint(len(set(items)))",
     choices: ["4", "6", "3", "5"], answerIndex: 0,
     explain: "Sets eliminate duplicates. Unique elements are {1, 2, 3, 4}, so length is 4." }),
+  Tr({ topic: 'strings', title: 'Trace: string split and join',
+    code: "parts = 'hello world python'.split()\\nprint('-'.join(parts[::-1]))",
+    choices: ["python-world-hello", "hello-world-python", "python world hello", "olleh-dlrow-nohtyp"], answerIndex: 0,
+    explain: "split() creates ['hello', 'world', 'python']. Reversing gives ['python', 'world', 'hello'], joined with dashes." }),
 ]
 
 export const pythonTopics = [
