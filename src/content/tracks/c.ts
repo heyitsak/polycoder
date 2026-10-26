@@ -133,4 +133,8 @@ int main() {
     story: 'GRAND CHALLENGE: print the indexes of two numbers summing to t.',
     samples: ['4\n2 7 11 15\n9'], hidden: ['3\n3 2 4\n6', '2\n3 3\n6', '5\n1 2 3 4 5\n10', '4\n-1 0 1 2\n0'],
     diff: 'hard', minutes: 15, xp: 30, boss: true, limitMs: 2000 }),
+  Tr({ topic: 'variables', title: 'Trace: pointer arithmetic',
+    code: "int arr[] = {10, 20, 30, 40};\\nint *p = arr;\\nprintf('%d %d', *p, *(p + 2));",
+    choices: ["10 30", "10 20", "20 30", "10 40"], answerIndex: 0,
+    explain: "*p is arr[0] (10). *(p + 2) shifts two elements ahead to arr[2] (30)." }),
 ]
