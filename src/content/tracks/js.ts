@@ -138,4 +138,8 @@ console.log(c);`,
     code: "const name = 'JS';\\nconst score = 95;\\nconsole.log(`${name}:${score >= 90 ? 'A' : 'B'}`);",
     choices: ["JS:A", "JS:B", "JS:95", "name:A"], answerIndex: 0,
     explain: "The ternary expression evaluates to 'A' since 95 >= 90 is true." }),
+  Tr({ topic: 'arrays', title: 'Trace: slice vs splice',
+    code: "const a = [10, 20, 30, 40];\\nconst sub = a.slice(1, 3);\\nconsole.log(sub.length, a.length);",
+    choices: ["2 4", "2 2", "3 4", "1 4"], answerIndex: 0,
+    explain: "slice(1, 3) returns a new array with elements at index 1 and 2 (length 2) without mutating original a (length 4)." }),
 ]
