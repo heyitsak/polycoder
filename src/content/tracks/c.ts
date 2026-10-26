@@ -145,4 +145,8 @@ int main() {
     code: "int tick() {\\n    static int count = 0;\\n    return ++count;\\n}\\nint main() {\\n    tick();\\n    printf('%d', tick());\\n}",
     choices: ["2", "1", "0", "Undefined"], answerIndex: 0,
     explain: "static local variables persist between function invocations. First tick() is 1, second is 2." }),
+  Tr({ topic: 'conditions', title: 'Trace: bitwise AND masking',
+    code: "int flags = 0x05; // 0101\\nint mask = 0x04;  // 0100\\nprintf('%s', (flags & mask) ? 'YES' : 'NO');",
+    choices: ["YES", "NO", "0", "1"], answerIndex: 0,
+    explain: "0101 & 0100 is 0100 (non-zero 4), which evaluates to true, printing 'YES'." }),
 ]
